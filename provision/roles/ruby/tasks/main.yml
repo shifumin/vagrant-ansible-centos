@@ -1,0 +1,45 @@
+---
+- name: packages should be installed
+  yum: name={{ item }} state=latest
+  with_items:
+    - gcc-c++
+    - openssl-devel
+    - zlib-devel
+    - curl-devel
+    - mysql-devel
+    - readline-devel
+    - libevent-devel
+
+- name: get ruby version
+  shell: "ruby -e 'puts RUBY_VERSION'"
+  register: installed_ruby_version
+  ignore_errors: True
+- debug: var="{{installed_ruby_version}}"
+- debug: var="{{installed_ruby_version.stdout}}"
+
+- name: get ruby source
+  get_url: url=http://cache.ruby-lang.org/pub/ruby/ruby-{{ ruby_version }}.tar.gz dest={{ src_dir }}
+  when: installed_ruby_version|failed
+
+- name: expand ruby
+  command: tar zxvf {{ src_dir }}/ruby-{{ ruby_version }}.tar.gz chdir={{ src_dir }}
+  when: installed_ruby_version|failed
+
+- name: compile
+  command: chdir={{ src_dir }}/ruby-{{ ruby_version }} ./configure --prefix=/usr
+  when: installed_ruby_version|failed
+
+- name: ruby should be built
+  command: chdir={{ src_dir }}/ruby-{{ ruby_version }} make
+  when: installed_ruby_version|failed
+
+- name: ruby should be installed
+  command: chdir={{ src_dir }}/ruby-{{ ruby_version }} make install
+  when: installed_ruby_version|failed
+
+- name: update rubygems
+  command: gem update --system
+
+- name: bundler gem should be installed
+  command: gem install bundler
+

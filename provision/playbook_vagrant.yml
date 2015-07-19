@@ -9,11 +9,12 @@
     home: "/home/{{user}}"
     user: vagrant
     src_dir: '/usr/local/src'
-    ruby_version: '2.1.2'
+    ruby_version: '2.2.2'
 
     rails:
       dir: /var/www/rails/
 
   roles:
     - common
+    - ruby
 
