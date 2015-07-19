@@ -1,0 +1,19 @@
+---
+- name: setting rails to server
+  hosts: dev_server
+  user: vagrant
+  sudo: yes
+  vars:
+    environtment: vagrant
+    mysql_port: 3306
+    home: "/home/{{user}}"
+    user: vagrant
+    src_dir: '/usr/local/src'
+    ruby_version: '2.1.2'
+
+    rails:
+      dir: /var/www/rails/
+
+  roles:
+    - common
+

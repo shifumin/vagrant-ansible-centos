@@ -14,15 +14,16 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   # config.vm.box = "chef/centos-6.6"
 
-  config.vm.define "vagrant" do |node|
+  config.vm.define :web do |node|
     node.vm.box = "chef/centos-6.6"
-    node.vm.hostname = "vagrant"
+    node.vm.hostname = "dev-centos"
     node.vm.network :private_network, ip: "192.168.42.30"
+    node.vm.network :forwarded_port, guest: 3000, host: 8080
   end
 
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "playbook_vagrant.yml"
-    ansible.inventory_path = "hosts"
+  config.vm.provision :ansible do |ansible|
+    ansible.playbook = "provision/playbook_vagrant.yml"
+    ansible.inventory_path = "provision/hosts"
     ansible.limit = "all"
     ansible.verbose = "v"
   end
