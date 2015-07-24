@@ -1,0 +1,10 @@
+---
+- name: install MySQL
+  yum: name={{ item }} state=installed
+  with_items:
+    - mysql-server
+    - mysql-devel
+  tags: mysqld
+
+- name: place mysql conf file
+  template: src={{ environtment }}/my.cnf dest=/etc/my.cnf mode=0644 owner=root group=root

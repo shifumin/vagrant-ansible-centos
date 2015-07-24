@@ -1,0 +1,25 @@
+# Rails
+- name: Make Dir For Rails...
+  shell: 'mkdir -p {{rails.dir}}'
+
+- name: "change owner and permission rails.dir"
+  sudo: true
+  file: path={{ rails.dir }} recurse=yes mode=0755 owner={{ user }} group={{ user }}
+
+# fix slow networking (due to IPv6) on CentOS 6.x
+- name: Fix slow networking (due to IPv6)
+  lineinfile: dest=/etc/resolv.conf line="options single-request-reopen" state=present insertafter=EOF
+
+# gem module may be good
+- name: Install Rails
+  command: gem install rails --no-ri --no-rdoc -v 4.0
+
+- name: add repo for nodejs
+  sudo: true
+  shell: rpm -ivh http://ftp.riken.jp/Linux/fedora/epel/6/x86_64/epel-release-6-8.noarch.rpm
+  register: result
+  ignore_errors: True
+
+- name: Install JavaScript runtime
+  #sudo: yes
+  yum: name=npm enablerepo=epel state=present
