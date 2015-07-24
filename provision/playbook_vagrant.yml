@@ -16,5 +16,6 @@
 
   roles:
     - common
+    - mysql
     - ruby
-
+    - rails
