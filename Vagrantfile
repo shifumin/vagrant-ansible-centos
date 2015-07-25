@@ -19,6 +19,10 @@ Vagrant.configure(2) do |config|
     node.vm.hostname = "dev-centos"
     node.vm.network :private_network, ip: "192.168.42.30"
     node.vm.network :forwarded_port, guest: 3000, host: 8080
+
+    if Vagrant.has_plugin?("vagrant-cachier")
+      node.cache.scope = :box
+    end
   end
 
   config.vm.provision :ansible do |ansible|
