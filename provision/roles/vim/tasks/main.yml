@@ -2,6 +2,17 @@
 - name: Install dependance tools
   yum: name={{ item }} state=latest
   with_items:
+    - mercurial
     - ncurses-devel
     - lua
     - lua-devel
+
+
+- name: Install
+  sudo: true
+
+
+- name: Put a symbolic link
+  sudo: true
+  shell: ln -s /opt/vim/bin/vim /usr/local/bin/
+
