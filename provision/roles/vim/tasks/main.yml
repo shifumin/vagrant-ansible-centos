@@ -1,0 +1,7 @@
+---
+- name: Install dependance tools
+  yum: name={{ item }} state=latest
+  with_items:
+    - ncurses-devel
+    - lua
+    - lua-devel

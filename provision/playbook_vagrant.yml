@@ -9,6 +9,8 @@
     home: "/home/{{user}}"
     user: vagrant
     src_dir: '/usr/local/src'
+    vim_version: '7.4'
+    vim_bin_dir: '/usr/local/bin'
     ruby_version: '2.2.2'
 
     rails:
