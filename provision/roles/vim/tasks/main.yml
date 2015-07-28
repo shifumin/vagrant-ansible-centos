@@ -1,5 +1,5 @@
 ---
-- name: Install dependance tools
+- name: install dependance tools
   yum: name={{ item }} state=latest
   with_items:
     - mercurial
@@ -10,7 +10,20 @@
 
 - name: Install
   sudo: true
+  command: {{ item }}
+  with_item:
+  - ./configure --prefix=/opt/vim  --with-features=huge --enable-multibyte --enable-rubyinterp --enable-luainterp --enable-cscope --enable-fail-if-missing --with-ruby-command=/home/{{ user }}/.rbenv/shims/ruby
+  - make
+  - make install
 
+- name: install packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - ctags
+
+- name: install Neobundle
+ sudo: true
+ shell: curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 
 - name: Put a symbolic link
   sudo: true
