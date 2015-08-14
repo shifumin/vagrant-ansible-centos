@@ -12,6 +12,7 @@
     vim_version: '7.4'
     vim_bin_dir: '/usr/local/bin'
     ruby_version: '2.2.2'
+    rails_version: '4.2.3'
 
     rails:
       dir: /var/www/rails/
