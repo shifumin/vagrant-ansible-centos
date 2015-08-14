@@ -8,6 +8,8 @@
     mysql_port: 3306
     home: "/home/{{user}}"
     user: vagrant
+    branch: master
+    repos_dir: '{{ home }}/ansible-tut'
     src_dir: '/usr/local/src'
     vim_version: '7.4'
     vim_bin_dir: '/usr/local/bin'
