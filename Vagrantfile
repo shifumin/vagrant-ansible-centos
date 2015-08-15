@@ -6,6 +6,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.hostname = "dev-centos"
     node.vm.network :private_network, ip: "192.168.42.30"
     node.vm.network :forwarded_port, guest: 3000, host: 8080
+    node.ssh.forward_agent = true
 
     if Vagrant.has_plugin?("vagrant-cachier")
       node.cache.scope = :box
