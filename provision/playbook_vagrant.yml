@@ -6,8 +6,8 @@
   vars:
     environtment: vagrant
     mysql_port: 3306
-    home: "/home/{{user}}"
     user: vagrant
+    home_dir: "/home/{{ user }}"
     branch: master
     repos_dir: '{{ home }}/ansible-tut'
     src_dir: '/usr/local/src'
