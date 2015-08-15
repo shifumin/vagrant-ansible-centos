@@ -1,4 +1,4 @@
 ---
 - name: git clone dotfiles repository
   git: repo=git@github.com:shifumin/dotfiles.git
-  dest={{ repos_dir }} version={{ branch }} accept_hostkey=yes
+  dest=/home/{{ user }}/dotfiles version={{ branch }} accept_hostkey=yes
