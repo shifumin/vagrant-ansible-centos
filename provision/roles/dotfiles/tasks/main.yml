@@ -1,0 +1,14 @@
+---
+- name: git clone dotfiles repository
+  sudo: no
+  git:
+    repo=git@github.com:shifumin/dotfiles.git
+    dest=/home/{{ user }}/dotfiles
+    version={{ branch }}
+    accept_hostkey=yes
+
+- name: put a symbolic link for dotfiles
+  shell: ./setup.sh
+  args:
+    chdir: dotfiles/
+  ignore_errors: True
