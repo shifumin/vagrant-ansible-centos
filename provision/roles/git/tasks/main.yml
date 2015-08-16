@@ -1,4 +1,34 @@
 ---
-- name: git clone dotfiles repository
-  git: repo=git@github.com:shifumin/dotfiles.git dest=/home/{{ user }}/dotfiles version={{ branch }} accept_hostkey=yes
-  sudo: no
+- name: install dependence packages
+  yum:  name={{ item }} state=latest
+  with_items:
+    - curl-devel
+    - expat-devel
+    - gettext-devel
+    - openssl-devel
+    - zlib-devel
+    - perl-ExtUtils-MakeMaker
+
+- name: get git version
+  shell: "{{ git_bin_dir }}/git --version"
+  register: installed_git_version
+  ignore_errors: True
+
+- name: download git source
+  shell: |
+    wget https://www.kernel.org/pub/software/scm/git/git-{{ git_ver }}.tar.gz
+    tar zxvf git-{{ git_ver }}.tar.gz
+    rm -f git-{{ git_ver }}.tar.gz
+  args:
+    chdir: "{{ git_src_dir }}"
+  when: installed_git_version.stdout != "git version {{ git_ver }}"
+
+- name: install git
+  shell: |
+    cd git-{{ git_ver }}
+    ./configure --prefix=/usr/local/
+    make
+    make install
+  args:
+    chdir: "{{ git_src_dir }}"
+  when: installed_git_version.stdout != "git version {{ git_ver }}"
