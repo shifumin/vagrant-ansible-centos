@@ -1,5 +1,5 @@
 ---
-- name: packages should be installed
+- name: install dependence packages
   yum: name={{ item }} state=latest
   with_items:
     - gcc-c++
