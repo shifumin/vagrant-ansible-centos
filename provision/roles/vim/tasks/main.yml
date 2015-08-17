@@ -7,7 +7,6 @@
     - lua
     - lua-devel
 
-
 - name: Install
   sudo: true
   command: {{ item }}
@@ -22,8 +21,8 @@
     - ctags
 
 - name: install Neobundle
- sudo: true
- shell: curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
+  sudo: true
+  shell: curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 
 - name: Put a symbolic link
   sudo: true
