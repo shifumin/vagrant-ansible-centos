@@ -1,0 +1,63 @@
+---
+#- name: install dependence packages
+#  yum:  name={{ item }} enablerepo=epel,remi state=latest
+#  with_items:
+#    - libyaml
+#    - libyaml-devel
+#    - zlib
+#    - zlib-devel
+#    - readline
+#    - readline-devel
+#    - openssl
+#    - openssl-devel
+#    - libxml2
+#    - libxml2-devel
+#    - libxslt
+#    - libxslt-devel
+#    - libffi-devel
+#    - wget
+
+- name: install rbenv
+  sudo: no
+  git:
+    repo: git@github.com:sstephenson/rbenv.git
+    dest: /home/{{ user }}/.rbenv
+
+- name: install ruby-build
+  sudo: no
+  git:
+    repo: git@github.com:sstephenson/ruby-build.git
+    dest: /home/{{ user }}/.rbenv/plugins/ruby-build
+
+- name: install rbenv-default-gems
+  sudo: no
+  git:
+    repo: git@github.com:sstephenson/rbenv-default-gems.git
+    dest: /home/{{ user }}/.rbenv/plugins/rbenv-default-gems
+
+- name: put a symbolic link to default-gems
+  shell: ln -s /home/{{ user }}/dotfiles/default-gems /home/{{ user }}/.rbenv/default-gems
+  args:
+    creates: /home/{{ user }}/.rbenv/default-gems
+
+- name: install rbenv-update
+  sudo: no
+  git:
+    repo: git@github.com:rkh/rbenv-update.git
+    dest: /home/{{ user }}/.rbenv/plugins/rbenv-update
+
+- name: install RSense
+  shell: |
+    wget http://cx4a.org/pub/rsense/rsense-0.3.tar.bz2
+    tar jxvf rsense-0.3.tar.bz2
+    rm -f rsense-0.3.tar.bz2
+    cp -r rsense-0.3 /usr/local/lib
+    chmod +x /usr/local/lib/rsense-0.3/bin/rsense
+  args:
+    chdir: "{{ src_dir }}"
+    creates: /usr/local/lib/rsense-0.3/bin/rsense
+
+- name: install ctags
+  yum:  name={{ item }} enablerepo=epel,remi state=latest
+  with_items:
+    - ctags
