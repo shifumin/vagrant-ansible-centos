@@ -1,5 +1,5 @@
 ---
-- name: setting rails to server
+- name: setting vagrant
   hosts: dev_server
   user: vagrant
   sudo: yes
@@ -7,13 +7,10 @@
     environtment: vagrant
     mysql_port: 3306
     user: vagrant
-    home_dir: "/home/{{ user }}"
     branch: master
-    repos_dir: '{{ home }}/ansible-tut'
     src_dir: '/usr/local/src'
     vim_version: '7.4'
     vim_bin_dir: '/usr/local/bin'
-    ruby_version: '2.2.2'
     rails_version: '4.2.3'
 
     rails:
@@ -21,7 +18,11 @@
 
   roles:
     - common
-    - mysql
-    - ruby
-    - rails
     - git
+    - dotfiles
+    - zsh
+    - rbenv
+    #- mysql
+    #- vim
+    #- ruby
+    #- rails
