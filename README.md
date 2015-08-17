@@ -3,13 +3,18 @@ Vagrant-Ansible-Rails
 This is Ansible playbook to provision a Rails box suitable for production on a local Vagrant environment.
 
 ## Stack
+* Git
+* (dotfiles)
+* Zsh
+* Oh-My-Zsh
+* rbenv
 
-* Ruby2.2.2
-* Ruby on Rails4.2.3
-* MySQL
-* Vim7.4
+## Environment
+* Ansible 1.9.2
+* Vagrant 1.7.2
+* Virual Box 4.3.30
 
-## Usage
+## Usage(CentOS6.6)
 
 ```
 $ git clone git@github.com:shifumin/vagrant-ansible-rails.git
