@@ -1,6 +1,6 @@
-Vagrant-Ansible-Rails
+Vagrant-Ansible-CentOS
 ===============
-This is Ansible playbook to provision a Rails box suitable for production on a local Vagrant environment.
+This is Ansible playbook to provision a CentOS box suitable for production on a local Vagrant environment.
 
 ## Stack
 * Git
