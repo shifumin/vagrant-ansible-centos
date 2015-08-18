@@ -1,8 +1,9 @@
 ---
-- name: setting vagrant
+- name: setting Vagrant for CentOS
   hosts: dev_server
   user: vagrant
   sudo: yes
+  gather_facts: no
   vars:
     environtment: vagrant
     mysql_port: 3306
