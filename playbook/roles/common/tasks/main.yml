@@ -8,18 +8,14 @@
   notify: restart sshd
   ignore_errors: yes
 
-# package installation
-- name: add EPEL
-  sudo: true
-  shell: creates=/etc/yum.repos.d/epel.repo rpm -Uvh --replacepkgs http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-- name: yum update
+- name: yum upgrade all packages
   sudo: true
   yum: name=* state=latest
+
 - name: install basic packages
   sudo: true
   yum: name={{ item }} state=installed
   with_items:
-    - git
     - curl
     - wget
     - libselinux-python
@@ -42,8 +38,7 @@
     - libxslt-devel
     - ImageMagick
     - ImageMagick-devel
-    - vim
 
-- name: install Development Tool
+- name: install Development tools
   sudo: true
   shell: yum -y groupinstall "Development Tools"
