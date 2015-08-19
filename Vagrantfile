@@ -12,18 +12,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.memory = 1024
       vb.cpus = 2
       vb.name = "ansible-centos"
+    end
+
+    node.vm.provision :ansible do |ansible|
+      ansible.playbook = "playbook/site.yml"
+      ansible.inventory_path = "playbook/hosts"
+      ansible.limit = "all"
+      ansible.verbose = "v"
+    end
 
     if Vagrant.has_plugin?("vagrant-cachier")
       node.cache.scope = :box
     end
-
-    end
-  end
-
-  config.vm.provision :ansible do |ansible|
-    ansible.playbook = "provision/playbook_vagrant.yml"
-    ansible.inventory_path = "playbook/hosts"
-    ansible.limit = "all"
-    ansible.verbose = "v"
   end
 end
