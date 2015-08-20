@@ -5,3 +5,4 @@ src_dir: "/usr/local/src"
 
 git_ver: "2.5.0"
 zsh_ver: "5.0.8"
+tmux_ver: "2.0"
