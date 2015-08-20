@@ -1,0 +1,22 @@
+---
+- name: download libevent source
+  get_url:
+    url=http://downloads.sourceforge.net/project/levent/libevent/libevent-2.0/libevent-2.0.22-stable.tar.gz
+    dest="{{ src_dir }}/libevent-2.0.22-stable.tar.gz"
+
+- name: extract libevent source
+  unarchive:
+    src="{{ src_dir }}/libevent-2.0.22-stable.tar.gz"
+    dest="{{ src_dir }}"
+    copy=no
+    creates="{{ src_dir }}/libevent-2.0.22-stable"
+
+- name: install libevent
+  shell: >
+    {{ item }}
+    chdir="{{ src_dir }}/libevent-2.0.22-stable"
+    # creates=
+  with_items:
+    - ./configure
+    - make
+    - make install
