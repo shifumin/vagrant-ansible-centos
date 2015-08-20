@@ -5,23 +5,26 @@
     - ncurses-devel
 
 - name: download zsh source
-  shell: |
-    wget -O zsh-{{ zsh_ver }}.tar.bz2 http://sourceforge.net/projects/zsh/files/zsh/{{ zsh_ver }}/zsh-{{ zsh_ver }}.tar.bz2/download
-    tar jxvf zsh-{{ zsh_ver }}.tar.bz2
-    rm -f zsh-{{ zsh_ver }}.tar.bz2
-  args:
-    chdir: "{{ src_dir }}"
-    creates: "{{ bin_dir }}/zsh"
+  get_url:
+    url=http://sourceforge.net/projects/zsh/files/zsh/{{ zsh_ver }}/zsh-{{ zsh_ver }}.tar.bz2/download
+    dest="{{ src_dir }}/zsh-{{ zsh_ver }}.tar.bz2"
+
+- name: extract zsh source
+  unarchive:
+    src="{{ src_dir }}/zsh-{{ zsh_ver }}.tar.bz2"
+    dest="{{ src_dir }}"
+    copy=no
+    creates="{{ src_dir }}/zsh-{{ zsh_ver }}"
 
 - name: install zsh
-  shell: |
-    cd zsh-{{ zsh_ver }}
-    ./configure
-    make
-    make install
-  args:
-    chdir: "{{ src_dir }}"
-    creates: "{{ bin_dir }}/zsh"
+  shell: >
+    {{ item }}
+    chdir="{{ src_dir }}/zsh-{{ zsh_ver }}"
+    creates="{{ bin_dir }}/zsh"
+  with_items:
+    - ./configure
+    - make
+    - make install
 
 - name: install oh-my-zsh
   sudo: no
@@ -31,4 +34,4 @@
     accept_hostkey=yes
 
 - name: change shell to zsh
-  shell: chsh -s /usr/local/bin/zsh {{ user }}
+  shell: chsh -s {{bin_dir }}/zsh {{ user }}
