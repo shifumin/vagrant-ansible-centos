@@ -7,6 +7,8 @@ This is Ansible playbook to provision a CentOS box suitable for production on a 
 * (dotfiles)
 * Zsh
 * Oh-My-Zsh
+* tmux
+* vim
 * rbenv
 
 ## Environment
