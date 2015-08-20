@@ -10,8 +10,8 @@
     tar jxvf zsh-{{ zsh_ver }}.tar.bz2
     rm -f zsh-{{ zsh_ver }}.tar.bz2
   args:
-    chdir: "{{ zsh_src_dir }}"
-    creates: "{{ zsh_bin_dir }}/zsh"
+    chdir: "{{ src_dir }}"
+    creates: "{{ bin_dir }}/zsh"
 
 - name: install zsh
   shell: |
@@ -20,15 +20,14 @@
     make
     make install
   args:
-    chdir: "{{ zsh_src_dir }}"
-    creates: "{{ zsh_bin_dir }}/zsh"
+    chdir: "{{ src_dir }}"
+    creates: "{{ bin_dir }}/zsh"
 
 - name: install oh-my-zsh
   sudo: no
   git:
     repo=git@github.com:robbyrussell/oh-my-zsh.git
     dest=/home/{{ user }}/.oh-my-zsh
-    version={{ branch }}
     accept_hostkey=yes
 
 - name: change shell to zsh
