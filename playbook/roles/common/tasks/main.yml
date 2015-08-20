@@ -1,44 +1,13 @@
-# common setting
+---
 - name: disallow root SSH access
   lineinfile: dest=/etc/ssh/sshd_config regexp="^#PermitRootLogin " line="PermitRootLogin no" state=present
   notify: restart sshd
   ignore_errors: yes
+
 - name: disallow password authentication
   lineinfile: dest=/etc/ssh/sshd_config regexp="^#PasswordAuthentication " line="PasswordAuthentication no" state=present
   notify: restart sshd
   ignore_errors: yes
 
-- name: yum upgrade all packages
-  sudo: true
-  yum: name=* state=latest
-
-- name: install basic packages
-  sudo: true
-  yum: name={{ item }} state=installed
-  with_items:
-    - curl
-    - wget
-    - libselinux-python
-    - ruby-devel
-    - readline-devel
-    - ncurses-devel
-    - gdbm-devel
-    - openssl-devel
-    - libxslt-devel
-    - sqlite-devel
-    - libyaml
-    - libyaml-devel
-    - tcl-devel
-    - db4-devel
-    - libffi-devel
-    - gcc
-    - libxml2
-    - libxml2-devel
-    - libxslt
-    - libxslt-devel
-    - ImageMagick
-    - ImageMagick-devel
-
-- name: install Development tools
-  sudo: true
-  shell: yum -y groupinstall "Development Tools"
+- name: /etc/init.d/vboxadd setup
+  shell: sudo /etc/init.d/vboxadd setup
