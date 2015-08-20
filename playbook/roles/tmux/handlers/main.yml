@@ -1,0 +1,5 @@
+---
+- name: add path to shared libraries
+  shell: |
+    echo /usr/local/lib >> /etc/ld.so.conf.d/usrlocal.conf
+    ldconfig
