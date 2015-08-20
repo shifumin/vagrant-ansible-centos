@@ -10,7 +10,7 @@
     - perl-ExtUtils-MakeMaker
 
 - name: get git version
-  shell: "{{ git_bin_dir }}/git --version"
+  shell: "{{ bin_dir }}/git --version"
   register: installed_git_version
   ignore_errors: True
 
@@ -20,7 +20,7 @@
     tar zxvf git-{{ git_ver }}.tar.gz
     rm -f git-{{ git_ver }}.tar.gz
   args:
-    chdir: "{{ git_src_dir }}"
+    chdir: "{{ src_dir }}"
   when: installed_git_version.stdout != "git version {{ git_ver }}"
 
 - name: install git
@@ -30,5 +30,5 @@
     make
     make install
   args:
-    chdir: "{{ git_src_dir }}"
+    chdir: "{{ src_dir }}"
   when: installed_git_version.stdout != "git version {{ git_ver }}"
