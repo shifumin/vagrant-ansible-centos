@@ -15,7 +15,30 @@
   shell: >
     {{ item }}
     chdir="{{ src_dir }}/libevent-2.0.22-stable"
-    # creates=
+    creates=/usr/local/lib/libevent-2.0.so.5
+  with_items:
+    - ./configure
+    - make
+    - make install
+  notify: add path to shared libraries
+
+- name: download tmux source
+  get_url:
+    url=https://github.com/tmux/tmux/releases/download/{{ tmux_ver }}/tmux-{{ tmux_ver }}.tar.gz
+    dest="{{ src_dir }}/tmux-{{ tmux_ver }}.tar.gz"
+
+- name: extract tmux source
+  unarchive:
+    src="{{ src_dir }}/tmux-{{ tmux_ver }}.tar.gz"
+    dest="{{ src_dir }}"
+    copy=no
+    creates="{{ src_dir }}/tmux-{{ tmux_ver }}"
+
+- name: install tmux
+  shell: >
+    {{ item }}
+    chdir="{{ src_dir }}/tmux-{{ tmux_ver }}"
+    creates="{{ bin_dir }}/tmux"
   with_items:
     - ./configure
     - make
