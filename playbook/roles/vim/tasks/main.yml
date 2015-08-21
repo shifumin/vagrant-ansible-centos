@@ -1,6 +1,6 @@
 ---
 - name: install packages
-  yum: name={{ item }} state=latest
+  yum: name={{ item }} enablerepo=epel,remi state=latest
   with_items:
     - vim-enhanced
     - ctags
