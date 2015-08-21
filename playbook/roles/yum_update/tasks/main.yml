@@ -1,6 +1,8 @@
 ---
 - name: upgrade all packages
   yum: name=* state=latest
+  tags:
+    - yum
 
 - name: install basic packages
   yum: name={{ item }} state=installed
@@ -27,6 +29,10 @@
     - libxslt-devel
     - ImageMagick
     - ImageMagick-devel
+  tags:
+    - yum
 
 - name: install Development tools
   shell: yum -y groupinstall "Development Tools"
+  tags:
+    - yum

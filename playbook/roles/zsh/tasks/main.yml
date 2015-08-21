@@ -3,6 +3,8 @@
   yum:  name={{ item }} state=latest
   with_items:
     - ncurses-devel
+  tags:
+    - yum
 
 - name: download zsh source
   get_url:
