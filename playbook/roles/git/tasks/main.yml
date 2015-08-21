@@ -8,6 +8,8 @@
     - openssl-devel
     - zlib-devel
     - perl-ExtUtils-MakeMaker
+  tags:
+    - yum
 
 - name: get git version
   shell: "{{ bin_dir }}/git --version"
@@ -15,14 +17,16 @@
   ignore_errors: True
 
 - name: download git source
-  shell: >
-    {{ item }}
-    chdir="{{ src_dir }}"
-  with_items:
-    - wget https://www.kernel.org/pub/software/scm/git/git-{{ git_ver }}.tar.gz
-    - tar zxvf git-{{ git_ver }}.tar.gz
-    - rm -f git-{{ git_ver }}.tar.gz
-  when: installed_git_version.stdout != "git version {{ git_ver }}"
+  get_url:
+    url=https://www.kernel.org/pub/software/scm/git/git-{{ git_ver }}.tar.gz
+    dest="{{ src_dir }}/git-{{ git_ver }}.tar.gz"
+
+- name: extract git source
+  unarchive:
+    src="{{ src_dir }}/git-{{ git_ver }}.tar.gz"
+    dest="{{ src_dir }}"
+    copy=no
+    creates="{{ src_dir }}/git-{{ git_ver }}"
 
 - name: install git
   shell: >
