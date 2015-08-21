@@ -1,2 +1,4 @@
 # Vagrant stuff
 .vagrant
+
+playbook/roles/common
