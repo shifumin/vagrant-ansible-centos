@@ -20,7 +20,7 @@ This is Ansible playbook to provision a CentOS box suitable for production on a 
 ## Usage
 
 ```
-$ git clone git@github.com:shifumin/vagrant-ansible-rails.git
-$ cd vagrant-ansible-rails
+$ git clone git@github.com:shifumin/vagrant-ansible-centos.git
+$ cd vagrant-ansible-centos
 $ vagrant up
 ```
