@@ -4,19 +4,19 @@ This is Ansible playbook to provision a CentOS box suitable for production on a 
 
 ## Stack
 * Git
-* (dotfiles)
+* dotfiles (install my dotfiles based on https://github.com/shifumin/dotfiles)
 * Zsh
 * Oh-My-Zsh
 * tmux
 * vim
 * rbenv
 
-## Environment
-* Ansible 1.9.2
-* Vagrant 1.7.2
-* Virual Box 4.3.30
+## Prerequired
+* Ansible
+* Vagrant
+* Virual Box
 
-## Usage(CentOS6.6)
+## Usage(for CentOS6.6)
 
 ```
 $ git clone git@github.com:shifumin/vagrant-ansible-rails.git
