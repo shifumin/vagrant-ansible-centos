@@ -6,7 +6,6 @@
   gather_facts: no
 
   roles:
-    - common
     - yum_repo
     - yum_update
     - git
