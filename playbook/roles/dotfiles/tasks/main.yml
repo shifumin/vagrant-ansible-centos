@@ -6,9 +6,9 @@
     dest=/home/{{ user }}/dotfiles
     accept_hostkey=yes
 
-- name: put a symbolic link for dotfiles
+- name: put a symbolic link to dotfiles
   sudo: no
-  shell: ./setup.sh
-  args:
-    chdir: dotfiles/
+  shell: >
+    ./setup.sh
+    chdir=dotfiles
   ignore_errors: True
