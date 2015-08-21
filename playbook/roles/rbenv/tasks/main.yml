@@ -15,6 +15,8 @@
     - libxslt
     - libxslt-devel
     - libffi-devel
+  tags:
+    - yum
 
 - name: install rbenv
   sudo: no
@@ -45,14 +47,23 @@
     repo=git@github.com:rkh/rbenv-update.git
     dest=/home/{{ user }}/.rbenv/plugins/rbenv-update
 
+- name: download RSense source
+  get_url:
+    url=http://cx4a.org/pub/rsense/rsense-0.3.tar.bz2
+    dest="{{ src_dir }}/rsense-0.3.tar.bz2"
+
+- name: extract RSense source
+  unarchive:
+    src="{{ src_dir }}/rsense-0.3.tar.bz2"
+    dest="{{ src_dir }}"
+    copy=no
+    creates="{{ src_dir }}/rsense-0.3"
+
 - name: install RSense
   shell: >
     {{ item }}
     chdir="{{ src_dir }}"
     creates=/usr/local/lib/rsense-0.3/bin/rsense
   with_items:
-    - wget http://cx4a.org/pub/rsense/rsense-0.3.tar.bz2
-    - tar jxvf rsense-0.3.tar.bz2
-    - rm -f rsense-0.3.tar.bz2
     - cp -r rsense-0.3 /usr/local/lib
     - chmod +x /usr/local/lib/rsense-0.3/bin/rsense
