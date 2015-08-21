@@ -31,7 +31,6 @@
   git:
     repo=git@github.com:robbyrussell/oh-my-zsh.git
     dest=/home/{{ user }}/.oh-my-zsh
-    accept_hostkey=yes
 
 - name: change shell to zsh
   shell: chsh -s {{bin_dir }}/zsh {{ user }}
