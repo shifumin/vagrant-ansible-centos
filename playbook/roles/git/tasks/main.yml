@@ -15,20 +15,21 @@
   ignore_errors: True
 
 - name: download git source
-  shell: |
-    wget https://www.kernel.org/pub/software/scm/git/git-{{ git_ver }}.tar.gz
-    tar zxvf git-{{ git_ver }}.tar.gz
-    rm -f git-{{ git_ver }}.tar.gz
-  args:
-    chdir: "{{ src_dir }}"
+  shell: >
+    {{ item }}
+    chdir="{{ src_dir }}"
+  with_items:
+    - wget https://www.kernel.org/pub/software/scm/git/git-{{ git_ver }}.tar.gz
+    - tar zxvf git-{{ git_ver }}.tar.gz
+    - rm -f git-{{ git_ver }}.tar.gz
   when: installed_git_version.stdout != "git version {{ git_ver }}"
 
 - name: install git
-  shell: |
-    cd git-{{ git_ver }}
-    ./configure --prefix=/usr/local/
-    make
-    make install
-  args:
-    chdir: "{{ src_dir }}"
+  shell: >
+    {{ item }}
+    chdir="{{ src_dir }}/git-{{ git_ver }}"
+  with_items:
+   - ./configure --prefix=/usr/local/
+   -  make
+   -  make install
   when: installed_git_version.stdout != "git version {{ git_ver }}"
