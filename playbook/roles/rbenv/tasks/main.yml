@@ -38,8 +38,10 @@
 
 - name: put a symbolic link to default-gems
   shell: >
-    ln -s /home/{{ user }}/dotfiles/default-gems /home/{{ user }}/.rbenv/default-gems
+    {{ item }}
     creates=/home/{{ user }}/.rbenv/default-gems
+  with_itme:
+    - ln -s /home/{{ user }}/dotfiles/default-gems /home/{{ user }}/.rbenv/default-gems
 
 - name: install rbenv-update
   sudo: no
