@@ -9,6 +9,8 @@
 - name: put a symbolic link to dotfiles
   sudo: no
   shell: >
-    ./setup.sh
-    chdir=dotfiles
+    {{ item }}
+    chdir=/hoge/{{ user }}/dotfiles
+  with_items:
+    - ./setup.sh
   ignore_errors: True
