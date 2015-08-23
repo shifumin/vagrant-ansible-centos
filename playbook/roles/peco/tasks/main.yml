@@ -1,0 +1,21 @@
+---
+- name: download peco source
+  get_url:
+    url=https://github.com/peco/peco/releases/download/v0.3.3/peco_linux_amd64.tar.gz
+    dest="{{ src_dir }}/peco_linux_amd64.tar.gz"
+
+- name: extract peco source
+  unarchive:
+    src="{{ src_dir }}/peco_linux_amd64.tar.gz"
+    dest="{{ src_dir }}"
+    copy=no
+    creates="{{ src_dir }}/peco_linux_amd64"
+
+- name: install peco
+  shell: >
+    {{ item }}
+    chdir="{{ src_dir }}/peco_linux_amd64"
+    creates="{{ bin_dir }}/peco"
+  with_items:
+    - cp peco {{ bin_dir }}
+
