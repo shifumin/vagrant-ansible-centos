@@ -11,6 +11,9 @@
     - git
     - dotfiles
     - zsh
+    - peco
     - tmux
+    - nginx
+    - mysql
     - vim
     - rbenv

@@ -1,14 +1,10 @@
 ---
-- name: upgrade all packages
-  yum: name=* state=latest
-  tags:
-    - yum
-
 - name: install basic packages
   yum: name={{ item }} state=installed
   with_items:
     - curl
     - wget
+    - gcc
     - libselinux-python
     - ruby-devel
     - readline-devel
@@ -22,7 +18,6 @@
     - tcl-devel
     - db4-devel
     - libffi-devel
-    - gcc
     - libxml2
     - libxml2-devel
     - libxslt
