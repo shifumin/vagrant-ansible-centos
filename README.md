@@ -8,8 +8,11 @@ This is Ansible playbook to provision a CentOS box suitable for production on a 
 * dotfiles (install my dotfiles based on https://github.com/shifumin/dotfiles)
 * Zsh 5.0.8
 * Oh-My-Zsh
+* peco
 * tmux 2.0
 * vim 7.4
+* Nginx
+* MySQL 5.6
 * rbenv
 
 ## Prerequired
