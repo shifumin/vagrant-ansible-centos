@@ -1,0 +1,16 @@
+---
+- name: make EPEL repos disabled
+  ini_file: dest=/etc/yum.repos.d/epel.repo
+            section=epel
+            option=enabled
+            value=0
+  tags:
+    - yum
+
+- name: make EPEL-testing repos disabled
+  ini_file: dest=/etc/yum.repos.d/epel-testing.repo
+            section=epel-testing
+            option=enabled
+            value=0
+  tags:
+    - yum

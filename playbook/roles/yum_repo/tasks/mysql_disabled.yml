@@ -1,0 +1,24 @@
+---
+- name: make mysql-connectors-community repos disabled
+  ini_file: dest=/etc/yum.repos.d/mysql-community.repo
+            section=mysql-connectors-community
+            option=enabled
+            value=0
+  tags:
+    - yum
+
+  - name: make mysql-tools-community repos disabled
+  ini_file: dest=/etc/yum.repos.d/mysql-community.repo
+            section=mysql-tools-community
+            option=enabled
+            value=0
+  tags:
+    - yum
+
+  - name: make mysql56-community repos disabled
+  ini_file: dest=/etc/yum.repos.d/mysql-community.repo
+            section=mysql56-community
+            option=enabled
+            value=0
+  tags:
+    - yum

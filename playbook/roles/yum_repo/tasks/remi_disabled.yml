@@ -1,0 +1,8 @@
+---
+- name: make Remi-safe repos disabled
+  ini_file: dest=/etc/yum.repos.d/remi-safe.repo
+            section=remi-safe
+            option=enabled
+            value=0
+  tags:
+    - yum
