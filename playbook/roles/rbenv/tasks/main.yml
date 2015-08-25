@@ -40,7 +40,7 @@
   shell: >
     {{ item }}
     creates=/home/{{ user }}/.rbenv/default-gems
-  with_itme:
+  with_items:
     - ln -s /home/{{ user }}/dotfiles/default-gems /home/{{ user }}/.rbenv/default-gems
 
 - name: install rbenv-update
