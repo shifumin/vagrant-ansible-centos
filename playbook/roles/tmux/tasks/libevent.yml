@@ -1,0 +1,22 @@
+---
+- name: download libevent source
+  get_url:
+    url=http://downloads.sourceforge.net/project/levent/libevent/libevent-2.0/libevent-2.0.22-stable.tar.gz
+    dest="{{ src_dir }}/libevent-2.0.22-stable.tar.gz"
+
+- name: extract libevent source
+  unarchive:
+    src="{{ src_dir }}/libevent-2.0.22-stable.tar.gz"
+    dest="{{ src_dir }}"
+    copy=no
+
+- name: install libevent
+  shell: >
+    {{ item }}
+    chdir="{{ src_dir }}/libevent-2.0.22-stable"
+    creates=/usr/local/lib/libevent-2.0.so.5
+  with_items:
+    - ./configure
+    - make
+    - make install
+  notify: add path to shared libraries

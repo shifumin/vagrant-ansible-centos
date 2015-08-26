@@ -1,0 +1,21 @@
+---
+- name: download tmux source
+  get_url:
+    url=https://github.com/tmux/tmux/releases/download/{{ tmux_ver }}/tmux-{{ tmux_ver }}.tar.gz
+    dest="{{ src_dir }}/tmux-{{ tmux_ver }}.tar.gz"
+
+- name: extract tmux source
+  unarchive:
+    src="{{ src_dir }}/tmux-{{ tmux_ver }}.tar.gz"
+    dest="{{ src_dir }}"
+    copy=no
+
+- name: install tmux
+  shell: >
+    {{ item }}
+    chdir="{{ src_dir }}/tmux-{{ tmux_ver }}"
+    creates="{{ bin_dir }}/tmux"
+  with_items:
+    - ./configure
+    - make
+    - make install
