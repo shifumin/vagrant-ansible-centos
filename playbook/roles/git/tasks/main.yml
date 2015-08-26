@@ -2,6 +2,7 @@
 - name: install dependence packages
   yum:  name={{ item }} state=latest
   with_items:
+    - gcc
     - curl-devel
     - expat-devel
     - gettext-devel
@@ -26,7 +27,6 @@
     src="{{ src_dir }}/git-{{ git_ver }}.tar.gz"
     dest="{{ src_dir }}"
     copy=no
-    creates="{{ src_dir }}/git-{{ git_ver }}"
 
 - name: install git
   shell: >

@@ -59,7 +59,6 @@
     src="{{ src_dir }}/rsense-0.3.tar.bz2"
     dest="{{ src_dir }}"
     copy=no
-    creates="{{ src_dir }}/rsense-0.3"
 
 - name: install RSense
   shell: >

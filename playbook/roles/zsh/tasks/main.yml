@@ -16,7 +16,6 @@
     src="{{ src_dir }}/zsh-{{ zsh_ver }}.tar.bz2"
     dest="{{ src_dir }}"
     copy=no
-    creates="{{ src_dir }}/zsh-{{ zsh_ver }}"
 
 - name: install zsh
   shell: >

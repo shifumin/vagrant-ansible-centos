@@ -9,7 +9,6 @@
     src="{{ src_dir }}/peco_linux_amd64.tar.gz"
     dest="{{ src_dir }}"
     copy=no
-    creates="{{ src_dir }}/peco_linux_amd64"
 
 - name: install peco
   shell: >
