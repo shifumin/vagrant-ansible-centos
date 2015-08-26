@@ -7,7 +7,7 @@
 
   roles:
     - yum_repo
-    - yum_update
+    - yum_install
     - git
     - dotfiles
     - zsh

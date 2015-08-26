@@ -20,7 +20,7 @@ This is Ansible playbook to provision a CentOS box suitable for production on a 
 * Vagrant
 * Virual Box
 
-## Usage
+## Usage (Build a development environment)
 
 ```
 $ git clone git@github.com:shifumin/vagrant-ansible-centos.git
