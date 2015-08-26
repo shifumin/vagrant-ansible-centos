@@ -3,8 +3,9 @@
   yum: name={{ item }}  state=latest
   with_items:
     - mysql
-    - mysql-server
     - mysql-devel
+    - mysql-server
+    #- mysql-devel
   tags:
     - mysgl
     - yum
