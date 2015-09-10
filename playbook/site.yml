@@ -16,5 +16,5 @@
     - nginx
     - mysql
     - vim
-    - rbenv
+    - ruby
     - nodejs
