@@ -5,6 +5,7 @@
     - curl
     - wget
     - gcc
+    - make
     - libselinux-python
     - ruby-devel
     - readline-devel
