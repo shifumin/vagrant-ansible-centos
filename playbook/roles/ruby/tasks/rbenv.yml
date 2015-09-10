@@ -1,0 +1,50 @@
+---
+- name: install dependence packages
+  yum:  name={{ item }} state=latest
+  with_items:
+    - libyaml
+    - libyaml-devel
+    - zlib
+    - zlib-devel
+    - readline
+    - readline-devel
+    - openssl
+    - openssl-devel
+    - libxml2
+    - libxml2-devel
+    - libxslt
+    - libxslt-devel
+    - libffi-devel
+  tags:
+    - yum
+
+- name: install rbenv
+  sudo: no
+  git:
+    repo=git@github.com:sstephenson/rbenv.git
+    dest=/home/{{ user }}/.rbenv
+
+- name: install ruby-build
+  sudo: no
+  git:
+    repo=git@github.com:sstephenson/ruby-build.git
+    dest=/home/{{ user }}/.rbenv/plugins/ruby-build
+
+- name: install rbenv-default-gems
+  sudo: no
+  git:
+    repo=git@github.com:sstephenson/rbenv-default-gems.git
+    dest=/home/{{ user }}/.rbenv/plugins/rbenv-default-gems
+
+- name: put a symbolic link to default-gems
+  shell: >
+    {{ item }}
+    creates=/home/{{ user }}/.rbenv/default-gems
+  with_items:
+    - ln -s /home/{{ user }}/dotfiles/default-gems /home/{{ user }}/.rbenv/default-gems
+
+- name: install rbenv-update
+  sudo: no
+  git:
+    repo=git@github.com:rkh/rbenv-update.git
+    dest=/home/{{ user }}/.rbenv/plugins/rbenv-update
