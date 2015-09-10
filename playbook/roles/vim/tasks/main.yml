@@ -1,8 +1,34 @@
 ---
-- name: install packages
-  yum: name={{ item }} enablerepo=epel,remi state=latest
+- name: install dependence packages
+  yum:  name={{ item }} state=latest
   with_items:
-    - vim-enhanced
+    - lua-devel
+    - ncurses-devel
+    - mercurial
     - ctags
   tags:
     - yum
+
+- name: hg clone Vim repository
+  hg:
+    repo=https://vim.googlecode.com/hg
+    dest="{{ src_dir }}/vim"
+
+- name: install Vim
+  shell: >
+    {{ item }}
+    chdir="{{ src_dir }}/vim"
+    creates="{{ bin_dir }}/vim"
+  with_items:
+    - make distclean
+    - ./configure --prefix=/usr/local --with-ruby-command=/home/{{ user }}/.rbenv/shims/ruby --with-features=huge --enable-multibyte --enable-rubyinterp --enable-luainterp=dynamic --enable-cscope --enable-fail-if-missing
+    - make
+    - make install
+
+- name: install NeoBundle
+  shell: >
+    {{ item }}
+    chdir="{{ src_dir }}"
+    creates="/home/{{ user }}/.vim/bundle/neobundle.vim"
+  with_items:
+    - curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
