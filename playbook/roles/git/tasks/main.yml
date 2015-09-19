@@ -11,22 +11,29 @@
     - perl-ExtUtils-MakeMaker
   tags:
     - yum
+    - git
 
 - name: get git version
   shell: "{{ bin_dir }}/git --version"
   register: installed_git_version
   ignore_errors: True
+  tags:
+    - git
 
 - name: download git source
   get_url:
     url=https://www.kernel.org/pub/software/scm/git/git-{{ git_ver }}.tar.gz
     dest="{{ src_dir }}/git-{{ git_ver }}.tar.gz"
+  tags:
+    - git
 
 - name: extract git source
   unarchive:
     src="{{ src_dir }}/git-{{ git_ver }}.tar.gz"
     dest="{{ src_dir }}"
     copy=no
+  tags:
+    - git
 
 - name: install git
   shell: >
@@ -37,3 +44,16 @@
    -  make
    -  make install
   when: installed_git_version.stdout != "git version {{ git_ver }}"
+  tags:
+    - git
+
+- name: put a symbolic link to diff-highlight
+  file:
+    src: "{{ src_dir }}/git-{{ git_ver }}/contrib/diff-highlight/diff-highlight"
+    path: "{{ bin_dir }}/diff-highlight"
+    owner: root
+    group: root
+    mode: 755
+    state: link
+  tags:
+    - git
