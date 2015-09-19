@@ -5,7 +5,7 @@
     - mysql
     - mysql-devel
     - mysql-server
-    #- mysql-devel
+    - MySQL-python
   tags:
     - mysgl
     - yum
@@ -14,3 +14,17 @@
   service: name=mysqld state=started enabled=yes
   tags:
     - mysql
+
+- name: copy .my.cnf
+  template:
+    src: my.cnf.j2
+    dest: /root/.my.cnf
+    owner: root
+    group: root
+    mode: 600
+
+- name: set password for root user
+  mysql_user:
+    name: root
+    host: localhost
+    password: "{{ mysql_root_password }}"
