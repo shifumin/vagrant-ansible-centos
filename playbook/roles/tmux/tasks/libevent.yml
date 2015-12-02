@@ -1,7 +1,8 @@
 ---
 - name: download libevent source
   get_url:
-    url=http://downloads.sourceforge.net/project/levent/libevent/libevent-2.0/libevent-2.0.22-stable.tar.gz
+    # url=http://downloads.sourceforge.net/project/levent/libevent/libevent-2.0/libevent-2.0.22-stable.tar.gz
+    url=http://downloads.sourceforge.net/project/levent/libevent/libevent-2.0/libevent-2.0.22-stable.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Flevent%2F%3Fsource%3Dtyp_redirect&ts=1449024188&use_mirror=jaist
     dest="{{ src_dir }}/libevent-2.0.22-stable.tar.gz"
 
 - name: extract libevent source
