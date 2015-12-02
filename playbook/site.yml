@@ -13,6 +13,7 @@
     - zsh
     - peco
     - tmux
+    - apache
     - nginx
     - mysql
     - vim
