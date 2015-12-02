@@ -1,6 +1,6 @@
 ---
 - name: set yum repository for MySQL
-  yum: name=https://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
+  yum: name=https://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
   notify: yum update
   tags:
     - yum
