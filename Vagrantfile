@@ -1,11 +1,14 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :web do |node|
     node.vm.box = "bento/centos-6.7"
     node.vm.hostname = "centos.dev"
-    node.vm.network :private_network, ip: "192.168.42.30"
-    node.vm.network :forwarded_port, guest: 3000, host: 8080
+    node.vm.network :private_network, ip: "192.168.33.10"
+    node.vm.network :forwarded_port, guest: 3000, host: 3000
     node.ssh.forward_agent = true
 
     node.vm.provider :vitualbox do |vb|
