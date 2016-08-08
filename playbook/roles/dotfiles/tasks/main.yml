@@ -1,13 +1,13 @@
 ---
 - name: git clone dotfiles repository
-  sudo: no
+  become: no
   git:
     repo=git@github.com:shifumin/dotfiles.git
     dest=/home/{{ user }}/dotfiles
     accept_hostkey=yes
 
 - name: put a symbolic link to dotfiles
-  sudo: no
+  become: no
   shell: >
     {{ item }}
     chdir=/home/{{ user }}/dotfiles

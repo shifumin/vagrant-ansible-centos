@@ -28,7 +28,7 @@
     - make install
 
 - name: install oh-my-zsh
-  sudo: no
+  become: no
   git:
     repo=git@github.com:robbyrussell/oh-my-zsh.git
     dest=/home/{{ user }}/.oh-my-zsh

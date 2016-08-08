@@ -19,19 +19,19 @@
     - yum
 
 - name: install rbenv
-  sudo: no
+  become: no
   git:
     repo=git@github.com:sstephenson/rbenv.git
     dest=/home/{{ user }}/.rbenv
 
 - name: install ruby-build
-  sudo: no
+  become: no
   git:
     repo=git@github.com:sstephenson/ruby-build.git
     dest=/home/{{ user }}/.rbenv/plugins/ruby-build
 
 - name: install rbenv-default-gems
-  sudo: no
+  become: no
   git:
     repo=git@github.com:sstephenson/rbenv-default-gems.git
     dest=/home/{{ user }}/.rbenv/plugins/rbenv-default-gems
@@ -44,7 +44,7 @@
     - ln -s /home/{{ user }}/dotfiles/default-gems /home/{{ user }}/.rbenv/default-gems
 
 - name: install rbenv-update
-  sudo: no
+  become: no
   git:
     repo=git@github.com:rkh/rbenv-update.git
     dest=/home/{{ user }}/.rbenv/plugins/rbenv-update

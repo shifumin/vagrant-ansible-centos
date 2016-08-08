@@ -2,7 +2,7 @@
 - name: setting Vagrant for CentOS
   hosts: dev_server
   remote_user: vagrant
-  sudo: yes
+  become: yes
   gather_facts: no
 
   roles:
@@ -13,7 +13,7 @@
     - zsh
     - peco
     - tmux
-    - apache
+    # - apache
     - nginx
     - mysql
     - vim
