@@ -4,5 +4,3 @@
             section=remi-safe
             option=enabled
             value=0
-  tags:
-    - yum

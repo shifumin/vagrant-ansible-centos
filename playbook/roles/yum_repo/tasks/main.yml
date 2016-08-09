@@ -1,5 +1,18 @@
 ---
 - include: epel.yml
+  tags: yum_repo
 - include: remi.yml
+  tags: yum_repo
 - include: mysql.yml
+  tags: yum_repo
 - include: nginx.yml
+  tags: yum_repo
+
+# - include: epel_disabled.yml
+  # tags: yum_repo
+# - include: remi_disabled.yml
+  # tags: yum_repo
+# - include: mysql_disabled.yml
+  # tags: yum_repo
+# - include: nginx_disabled.yml
+  # ags: yum_repo

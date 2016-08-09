@@ -2,6 +2,4 @@
 - name: set yum repository for Remi
   yum: name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm state=present
   notify: yum update
-  tags:
-    - yum
 
